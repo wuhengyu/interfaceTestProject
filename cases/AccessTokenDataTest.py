@@ -11,7 +11,7 @@ from base.HTTPClient import headers, HTTPClient
 from utils.MysqlDB import db
 
 
-class AccessTokenData():
+class AccessTokenDataTest:
     def AccessToken(self):
         http_client = HTTPClient()
         params = db.selectFetchone("interface_data", columns=["interfaceParams"])
@@ -26,18 +26,22 @@ class AccessTokenData():
                 response_json = response_data.json()
                 if response_json['errcode'] == 0:
                     response_accessTokenData = response_json['access_token']
+                    response_accessTokenData = json.dumps(response_accessTokenData)
+                    db.insertOneJson("access_token_data", "accessTokenData", response_accessTokenData)
+                    print("获取access_token成功, ", response_accessTokenData)
                 else:
-                    db.insertOneJson("response_data", "responseData", response_json)
-                    print("获取access_token失败", response_json)
+                    db.insertOneJson("access_token_data", "accessTokenData", response_accessTokenData)
+                    print("获取access_token失败", response_accessTokenData)
+                db.commit()
             else:
                 print("params_dict参数异常")
+        return response_accessTokenData
 
-        response_json = json.dumps(response_json)
-        db.insertOneJson("response_data", "responseData", response_json)
-        db.insertOneJson("access_token_data", "accessTokenData", response_accessTokenData)
-        db.commit()
-        db.close()
-
-
-accessTokenData = AccessTokenData()
-accessTokenData.AccessToken()
+# accessTokenData = AccessTokenDataTest()
+# accessTokenData.AccessToken()
+# try:
+#     db.commit()
+# except Exception as e:
+#     print("An error occurred:", e)
+#
+# db.close()

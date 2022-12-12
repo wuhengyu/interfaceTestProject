@@ -17,3 +17,6 @@ class IniReader:
             return self.config.get(section, key)
         except Exception:
             return "没有获取到文件key值"
+
+
+# print(IniReader("E:\PycharmProjects\interfaceTestProject\config\weiXinHostPath.ini").get_value('hostPath', 'host'))

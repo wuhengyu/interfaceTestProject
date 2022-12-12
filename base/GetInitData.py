@@ -11,33 +11,58 @@ from utils.IniReader import IniReader
 class GetInitData:
     def __init__(self):
         self.base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.init_data = GetInitData()
 
-    def readIniFile(self, file_name):
-        file_path = self.base_path + '/config/' + file_name
+    def readIniFilePath(self, file_name):
+        file_path = self.base_path + '\\config\\' + file_name
         if not os.path.exists(file_path) or not os.path.isfile(file_path):
             raise ValueError("Invalid file path: {}".format(file_path))
         else:
-            self.reader = IniReader(file_path)
+            self.iniReader = IniReader(file_path)
+
+    def GetWeixinHostPath(self):
+        weixinHostPath = self.readIniFilePath('weiXinHostPath.ini')
+        return weixinHostPath
+
+    def getApiInterFace(self):
+        apiInterFace = self.readIniFilePath('apiInterFace.ini')
+        return apiInterFace
 
     def getBaseUrl(self):
-        base_url = self.reader.get_value('hostPath', 'host')
+        self.GetWeixinHostPath()
+        base_url = self.iniReader.get_value('hostPath', 'host')
         return base_url
 
     def getAcessTokenUrl(self):
-        acess_token_url = self.reader.get_value('getToken', 'get_token')
+        self.getApiInterFace()
+        acess_token_url = self.iniReader.get_value('getToken', 'get_token')
         return acess_token_url
 
     def getTokenUrl(self):
-        self.init_data.readIniFile('weixinHostPath.ini')
-        base_url = self.init_data.getBaseUrl()
-
-        self.init_data.readIniFile('apiInterFace.ini')
-        access_token_url = self.init_data.getAcessTokenUrl()
-        getTokenUrl = base_url + access_token_url
+        access_token_url = self.getAcessTokenUrl()
+        getTokenUrl = self.getBaseUrl() + access_token_url
         return getTokenUrl
 
-    def getDepartmentCreate(self):
-        get_Department_CreateUrl = self.reader.get_value('getDepartment', 'department_create')
-        get_Department_CreateUrl = self.getBaseUrl() + get_Department_CreateUrl
-        return get_Department_CreateUrl
+    def getDepartmentCreateUrl(self):
+        self.getApiInterFace()
+        get_Department_Create_Url = self.iniReader.get_value('getDepartment', 'department_create')
+        get_Department_Create_Url = self.getBaseUrl() + get_Department_Create_Url
+        return get_Department_Create_Url
+
+
+    def getDepartmentUpdateUrl(self):
+        self.getApiInterFace()
+        get_Department_Update_Url = self.iniReader.get_value('getDepartment', 'department_update')
+        get_Department_Update_Url = self.getBaseUrl() + get_Department_Update_Url
+        return get_Department_Update_Url
+
+    def getDepartmentGetUrl(self):
+        self.getApiInterFace()
+        get_Department_Get_Url = self.iniReader.get_value('getDepartment', 'department_get')
+        get_Department_Get_Url = self.getBaseUrl() + get_Department_Get_Url
+        return get_Department_Get_Url
+
+    def getDepartmentSimplelistUrl(self):
+        self.getApiInterFace()
+        get_Department_Simplelist_Url = self.iniReader.get_value('getDepartment', 'department_simplelist')
+        get_Department_Simplelist_Url = self.getBaseUrl() + get_Department_Simplelist_Url
+        return get_Department_Simplelist_Url

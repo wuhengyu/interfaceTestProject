@@ -52,10 +52,10 @@ class MySQLDB:
         self.cursor.execute(sql, tuple(data.values()))
 
         # 检查插入操作是否执行成功
-        if self.cursor.rowcount > 0:
-            print("插入成功")
-        else:
-            print("插入失败")
+        # if self.cursor.rowcount > 0:
+        #     print("插入成功")
+        # else:
+        #     print("插入失败")
 
 
     def insertOneJson(self, table, columns, data):
@@ -68,10 +68,10 @@ class MySQLDB:
         self.cursor.execute(sql, (data,))
 
         # 检查插入操作是否执行成功
-        if self.cursor.rowcount > 0:
-            print("插入成功")
-        else:
-            print("插入失败")
+        # if self.cursor.rowcount > 0:
+        #     print("插入成功")
+        # else:
+        #     print("插入失败")
 
 
     def update(self, table, data, condition):
@@ -163,6 +163,12 @@ class MySQLDB:
 
 
 db = MySQLDB(host="192.168.81.188", user="root", password="123456", database="interfaceTestProject")
+# data = db.selectFetchone("interface_data", columns=["interfaceParams"], condition="interfaceName='department/create'")
+# for x in data:
+#     data = json.loads(x)
+# print(data)
+# db.commit()
+# db.close()
 
 # data = {'errcode': 0, 'errmsg': 'ok', 'access_token': 'R2pYKjYEUgLbMkUDRkjtenBUKwDOPiw8jvUQbg1a5fxcp80rmuOOpEQzw6PdLsCize6CI7oRxuQt9AWDUjG882PyHC259EyQs5GrXVHPBdPf_NWuopmDdPON9-oZW83yg3Basrg-DANqbf1CPlmThZ2TKHP4kXdiFanGXCtx4gLlgqOEovA2Ea_8X_B2risdcVVhp812gvhq2Qe5po1jTQ', 'expires_in': 7200}
 # data = json.dumps(data)
@@ -197,7 +203,5 @@ db = MySQLDB(host="192.168.81.188", user="root", password="123456", database="in
 # query = "INSERT INTO users (username, email) VALUES (%s, %s)"
 # args = [("johndoe", "johndoe@example.com"), ("janedoe", "janedoe@example.com")]
 # cursor.executemany(query, args)
-
-db.selectFetchone("access_token_data", "accessTokenData")
 
 
