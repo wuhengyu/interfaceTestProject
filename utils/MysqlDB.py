@@ -158,7 +158,7 @@ class MySQLDB:
             sql = f"SELECT {columns} FROM {table}"
 
         self.cursor.execute(sql)
-        results = self.cursor.fetchall()
+        results = self.cursor.fetchone()
         return results
 
 

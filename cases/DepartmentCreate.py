@@ -10,5 +10,5 @@ from utils import ReaderNewToken, MysqlDB
 
 def DepartmentCreate():
     NewToken = ReaderNewToken.ReaderNewToken()
-    data = MysqlDB.MySQLDB.selectFetchone()
+    data = MysqlDB.MySQLDB.selectFetchone("access_token_data", )
     HttpClient.HttpClient.run("post", data, )
