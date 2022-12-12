@@ -198,4 +198,6 @@ db = MySQLDB(host="192.168.81.188", user="root", password="123456", database="in
 # args = [("johndoe", "johndoe@example.com"), ("janedoe", "janedoe@example.com")]
 # cursor.executemany(query, args)
 
+db.selectFetchone("access_token_data", "accessTokenData")
+
 

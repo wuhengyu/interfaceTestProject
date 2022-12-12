@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2022/12/9 17:35
 # @Author  : Walter
-# @File    : HttpClient.py
+# @File    : HTTPClient.py
 # @License : (C)Copyright Walter
 # @Desc    :
-import json
-
 import requests
 
-from base.GetInitData import getTokenUrl
-from utils.MysqlDB import db
 
-
-class HttpClient:
+class HTTPClient:
     def __init__(self, cookies=None, headers=None):
         self.session = requests.Session()
         self.cookies = cookies

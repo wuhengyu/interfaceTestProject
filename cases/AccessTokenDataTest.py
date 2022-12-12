@@ -1,25 +1,27 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2022/12/10 23:03
 # @Author  : Walter
-# @File    : AccessToken.py
+# @File    : AccessTokenDataTest.py
 # @License : (C)Copyright Walter
 # @Desc    :
 import json
 
-from base.GetInitData import getTokenUrl
-from base.HttpClient import headers, HttpClient
+from base.GetInitData import GetInitData
+from base.HTTPClient import headers, HTTPClient
 from utils.MysqlDB import db
 
 
 class AccessTokenData():
     def AccessToken(self):
-        http_client = HttpClient()
+        http_client = HTTPClient()
         params = db.selectFetchone("interface_data", columns=["interfaceParams"])
         response_json = None
         response_accessTokenData = None
         for param in params:
             params_json = json.loads(param)
             if param is not None:
+                getInitData = GetInitData()
+                getTokenUrl = getInitData.getTokenUrl()
                 response_data = http_client.run('get', getTokenUrl, params_json, headers)
                 response_json = response_data.json()
                 if response_json['errcode'] == 0:
