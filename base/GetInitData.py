@@ -66,3 +66,15 @@ class GetInitData:
         get_Department_Simplelist_Url = self.iniReader.get_value('getDepartment', 'department_simplelist')
         get_Department_Simplelist_Url = self.getBaseUrl() + get_Department_Simplelist_Url
         return get_Department_Simplelist_Url
+
+    def getCalendarAddUrl(self):
+        self.getApiInterFace()
+        get_Calendar_Add_Url = self.iniReader.get_value('calendar', 'calendar_add')
+        get_Calendar_Add_Url = self.getBaseUrl() + get_Calendar_Add_Url
+        return get_Calendar_Add_Url
+
+    def getScheduleAddUrl(self):
+        self.getApiInterFace()
+        get_Schedule_Add_Url = self.iniReader.get_value('schedule', 'schedule_add')
+        get_Schedule_Add_Url = self.getBaseUrl() + get_Schedule_Add_Url
+        return get_Schedule_Add_Url

@@ -28,10 +28,11 @@ class AccessTokenDataTest:
                     response_accessTokenData = response_json['access_token']
                     response_accessTokenData = json.dumps(response_accessTokenData)
                     db.insertOneJson("access_token_data", "accessTokenData", response_accessTokenData)
-                    print("获取access_token成功, ", response_accessTokenData)
+                    print("获取access_token成功:\n", response_accessTokenData)
                 else:
+                    print("获取access_token失败:\n", response_accessTokenData)
+                    response_accessTokenData = json.dumps(response_accessTokenData)
                     db.insertOneJson("access_token_data", "accessTokenData", response_accessTokenData)
-                    print("获取access_token失败", response_accessTokenData)
                 db.commit()
             else:
                 print("params_dict参数异常")
@@ -39,9 +40,4 @@ class AccessTokenDataTest:
 
 # accessTokenData = AccessTokenDataTest()
 # accessTokenData.AccessToken()
-# try:
-#     db.commit()
-# except Exception as e:
-#     print("An error occurred:", e)
-#
 # db.close()
